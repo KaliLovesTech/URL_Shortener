@@ -30,7 +30,7 @@ def createShortURL(request):
             random_chars = ''
             for i in range(6):
                 random_chars += random.choice(random_chars_list)
-            while len(ShortURL.objects.filter(short_url=random_chars) != 0):
+            while len(ShortURL.objects.filter(short_url=random_chars)) != 0:
                 for i in range(6):
                     random_chars += random.choice(random_chars_list)
 
@@ -40,3 +40,8 @@ def createShortURL(request):
 
             s.save()
             return render(request, 'urlcreated.html', {'chars': random_chars})
+
+    else:
+        form = CreateNewShortURL()
+        context = {'form': form}
+        return render(request, 'create.html', context)
